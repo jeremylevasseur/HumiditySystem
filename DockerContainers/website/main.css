@@ -1,0 +1,358 @@
+
+/*--------------------
+Leaderboard
+--------------------*/
+.leaderboard {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 70%;
+    background: linear-gradient(to bottom, #3a404d, #181c26);
+    border-radius: 10px;
+    box-shadow: 0 7px 30px rgba(62, 9, 11, 0.3);
+}
+
+.leaderboard h1 {
+    font-size: 38px;
+    font-weight: bold;
+    text-align: center;
+    color: #e1e1e1;
+    padding: 12px 13px 18px;
+}
+
+.leaderboard h1 svg {
+    width: 25px;
+    height: 30px;
+    position: relative;
+    top: 3px;
+    margin-right: 6px;
+    vertical-align: baseline;
+}
+
+#headers_div {
+    width: 100%;
+}
+
+#headers_div table {
+    width:100%;
+}
+
+#headers_div table #name_header {
+    position: absolute;
+    z-index: 2;
+    top: 63px;
+    left: 26px;
+    width: 100%;
+    height: 100%;
+    padding: 18px 10px 18px 70px;
+    margin: 0;
+    background: none;
+    color: #ed661c;
+    font-weight: bolder;
+    font-size: 35px;
+}
+
+#headers_div table #current_drink_header {
+    position: absolute;
+    z-index: 2;
+    top: 63px;
+    left: 17%;
+    width: 100%;
+    height: 100%;
+    padding: 18px 10px 18px 70px;
+    margin: 0;
+    background: none;
+    color: #ed661c;
+    font-weight: bolder;
+    font-size: 35px;
+}
+
+#headers_div table #next_drink_header {
+    position: absolute;
+    z-index: 2;
+    top: 63px;
+    left: 48%;
+    width: 100%;
+    height: 100%;
+    padding: 18px 10px 18px 70px;
+    margin: 0;
+    background: none;
+    color: #ed661c;
+    font-weight: bolder;
+    font-size: 35px;
+}
+
+#headers_div table #drinks_had_header {
+    position: absolute;
+    z-index: 2;
+    top: 63px;
+    left: 80%;
+    width: 100%;
+    height: 100%;
+    padding: 18px 10px 18px 70px;
+    margin: 0;
+    background: none;
+    color: #ed661c;
+    font-weight: bolder;
+    font-size: 35px;
+}
+
+.leaderboard ol {
+    margin-top: 15px;
+    counter-reset: leaderboard;
+}
+.leaderboard ol li {
+    position: relative;
+    list-style-type: none;
+    z-index: 1;
+    counter-increment: leaderboard;
+    padding: 28px 50px 18px 80px;
+    cursor: pointer;
+    backface-visibility: hidden;
+    transform: translateZ(0) scale(1, 1);
+    border-bottom: 2px solid gray;
+    margin-right: 35px;
+
+}
+.leaderboard ol li::before {
+    content: counter(leaderboard);
+    position: absolute;
+    z-index: 2;
+    top: 15px;
+    left: 15px;
+    width: 28px;
+    height: 28px;
+    line-height: 27px;
+    color: #c24448;
+    font-weight: bold;
+    font-size: 20px;
+    background: #fff;
+    border-radius: 20px;
+    text-align: center;
+}
+.leaderboard ol li mark {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 18px 10px 18px 70px;
+    margin: 0;
+    background: none;
+    color: #fff;
+    font-weight: bolder;
+    font-size: 35px;
+}
+
+.leaderboard ol li .current_drink_value {
+    position: absolute;
+    z-index: 2;
+    top: 5%;
+    left: 17%;
+    width: 100%;
+    height: 100%;
+    padding: 18px 10px 18px 70px;
+    margin: 0;
+    background: none;
+    color: #c9a3a3;
+    font-weight: bolder;
+    font-size: 25px;
+}
+
+.leaderboard ol li .next_drink_value {
+    position: absolute;
+    z-index: 2;
+    top: 5%;
+    left: 49%;
+    width: 100%;
+    height: 100%;
+    padding: 18px 10px 18px 70px;
+    margin: 0;
+    background: none;
+    color: #c9a3a3;
+    font-weight: bolder;
+    font-size: 25px;
+}
+
+.leaderboard ol li mark::before, .leaderboard ol li mark::after {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    bottom: -11px;
+    left: -9px;
+    border-top: 10px solid #c24448;
+    border-left: 10px solid transparent;
+    transition: all 0.1s ease-in-out;
+    opacity: 0;
+}
+.leaderboard ol li mark::after {
+    left: auto;
+    right: -9px;
+    border-left: none;
+    border-right: 10px solid transparent;
+}
+
+.leaderboard ol li small {
+    position: relative;
+    z-index: 2;
+    display: block;
+    color: white;
+    font-size: 40px;
+    font-weight: 900;
+    text-align: right;
+    padding-right: 40px;
+}
+.leaderboard ol li::after {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #fa6855;
+    box-shadow: 0 3px 0 rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease-in-out;
+    opacity: 0;
+}
+
+.leaderboard ol li:hover {
+    z-index: 2;
+    overflow: visible;
+}
+.leaderboard ol li:hover::after {
+    opacity: 1;
+    transform: scaleX(1.06) scaleY(1.03);
+}
+.leaderboard ol li:hover mark::before, .leaderboard ol li:hover mark::after {
+    opacity: 1;
+    transition: all 0.35s ease-in-out;
+}
+.the-most {
+    position: fixed;
+    z-index: 1;
+    bottom: 0;
+    left: 0;
+    width: 50vw;
+    max-width: 200px;
+    padding: 10px;
+}
+.the-most img {
+    max-width: 100%;
+}
+
+
+
+/*=================
+* TIMER
+*=================*/
+.timer {
+    z-index: 10;
+    width: 550px;
+    height: 248px;
+    display: block;
+    position: absolute;
+    top: 24%;
+    left: 50%;
+    margin-left: -275px;
+    margin-top: -124px;
+    color: white;
+}
+.timer * {
+    cursor: default;
+}
+.timer h3 {
+    width: 100%;
+    font-size: 26px;
+    letter-spacing: 4px;
+    text-align: center;
+}
+.timer--clock {
+    width: 100%;
+    position: relative;
+    padding-left: 6px;
+    margin-top: 22px;
+    overflow: hidden;
+}
+.timer--clock .clock-display-grp {
+    width: 100%;
+    position: relative;
+}
+.timer--clock .clock-display-grp .number-grp {
+    width: auto;
+    display: block;
+    height: 156px;
+    float: left;
+    overflow: hidden;
+}
+.timer--clock .clock-display-grp .number-grp .number-grp-wrp {
+    width: 100%;
+    position: relative;
+}
+.timer--clock .clock-display-grp .number-grp .number-grp-wrp .num {
+    width: 100%;
+    position: relative;
+    height: 156px;
+}
+.timer--clock .clock-display-grp .number-grp .number-grp-wrp .num p {
+    width: auto;
+    display: table;
+    font-size: 205px;
+    line-height: 150px;
+    font-weight: bold;
+}
+.timer--clock .clock-separator {
+    width: auto;
+    float: left;
+    display: block;
+    height: 156px;
+}
+.timer--clock .clock-separator p {
+    width: auto;
+    display: table;
+    font-size: 205px;
+    line-height: 150px;
+    font-weight: bold;
+}
+.timer h4 {
+    width: 100%;
+    font-size: 10px;
+    letter-spacing: 6px;
+    text-align: center;
+    padding-top: 25px;
+    float: left;
+}
+  
+.reload {
+    width: 125px;
+    height: 14px;
+    position: absolute;
+    bottom: 50vh;
+    left: 50%;
+    margin-left: -62.5px;
+    opacity: 0;
+    display: none;
+    cursor: pointer;
+    z-index: 9999;
+}
+.reload:hover svg path {
+    fill: #666666;
+}
+.reload:hover p {
+    color: #666666;
+}
+.reload svg {
+    width: 12px;
+    height: 12px;
+    float: left;
+    margin-right: 10px;
+}
+.reload p {
+    color: #2b2b2b;
+    font-size: 12px;
+    float: left;
+    line-height: 11px;
+}

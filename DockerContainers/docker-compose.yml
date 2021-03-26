@@ -1,0 +1,73 @@
+version: '3.5'
+
+services:
+    mysql1:
+        container_name: mysql1
+        image: mysql:5.7
+        restart: always
+        environment:
+            - MYSQL_ROOT_PASSWORD=secret
+            - TZ=US/Eastern
+        ports:
+            - '3306:3306'
+        expose:
+            - '3306'
+        networks:
+            - app-network
+        volumes:
+            -   type: bind
+                source: ./docker_db
+                target: /docker-entrypoint-initdb.d
+    phpmyadmin:
+        container_name: phpmyadmin
+        depends_on:
+            - mysql1
+        image: phpmyadmin/phpmyadmin
+        restart: always
+        ports:
+            - '80:80'
+        expose:
+            - "80"
+        links:
+            - mysql1
+        environment:
+            PMA_HOST: mysql1
+            MYSQL_PORT_3306_TCP_ADDR: mysql1
+            PMA_USER: root
+            PMA_PASSWORD: secret
+        networks:
+            - app-network
+    nodejs:
+        container_name: nodejs
+        restart: always
+        build: .
+        depends_on:
+            - mysql1
+        ports:
+            - "8085:8085"
+        expose:
+            - "8085"
+        links:
+            - mysql1
+        networks:
+            - app-network
+    webserver:
+        container_name: webserver
+        build: ./website/.
+        depends_on:
+            - nodejs
+        restart: always
+        tty: true
+        volumes:
+            - ./website:/var/www
+            - ./conf.d/:/etc/nginx/conf.d/
+        ports:
+            - "85:85"
+            - "443:443"
+        expose:
+            - "85"
+        networks:
+            - app-network
+networks:
+    app-network:
+        driver: bridge
